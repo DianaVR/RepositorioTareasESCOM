@@ -8,23 +8,33 @@ import java.io.Serializable;
  */
 public class Movimiento implements Serializable{
 
-    private double cantidad;
+    private double cantidad=0;
     private char tipo;
-    private int cuenta;
+    private int cuenta=0;
+    private int idCuenta;
 
     public Movimiento() {
     }
-
-    public Movimiento(double cantidad, char tipo, int cuenta) {
+    //Este constructor de usara para las operaciones normales
+    public Movimiento(double cantidad, char tipo, int idCuenta) {
+        this.cantidad = cantidad;
+        this.tipo = tipo;
+        this.idCuenta = idCuenta;
+    }
+    
+    
+    //Este constructor de usara unicamente para la transferencia
+    public Movimiento(double cantidad, char tipo, int cuenta, int idCuenta) {
         this.cantidad = cantidad;
         this.tipo = tipo;
         this.cuenta = cuenta;
+        this.idCuenta = idCuenta;
     }
-
-    public Movimiento(double cantidad, char tipo) {
-        this.cantidad = cantidad;
+    
+    //Este constructor de usara unicamente para indicar el historial movimientos
+    public Movimiento( char tipo, int idCuenta) {
         this.tipo = tipo;
-        this.cuenta = 0;
+        this.idCuenta = idCuenta;
     }
 
     public double getCantidad() {
@@ -50,5 +60,19 @@ public class Movimiento implements Serializable{
     public void setCuenta(int cuenta) {
         this.cuenta = cuenta;
     }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+    
+    
+
+    
+
+   
 
 }

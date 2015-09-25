@@ -4,6 +4,8 @@ package cliente;
  *
  * @author Ram
  */
+
+//Se retornara esta objeto en caso que el login sea satisfactorio
 public class Cuenta {
     
     private int idCuenta;
