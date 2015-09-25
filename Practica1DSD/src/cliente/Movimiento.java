@@ -5,6 +5,7 @@ package cliente;
  * @author Ram
  */
 public class Movimiento {
+
     private double cantidad;
     private char tipo;
     private int cuenta;
@@ -16,6 +17,12 @@ public class Movimiento {
         this.cantidad = cantidad;
         this.tipo = tipo;
         this.cuenta = cuenta;
+    }
+
+    public Movimiento(double cantidad, char tipo) {
+        this.cantidad = cantidad;
+        this.tipo = tipo;
+        this.cuenta = 0;
     }
 
     public double getCantidad() {
@@ -41,6 +48,5 @@ public class Movimiento {
     public void setCuenta(int cuenta) {
         this.cuenta = cuenta;
     }
-    
-    
+
 }
