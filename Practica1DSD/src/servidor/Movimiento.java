@@ -1,5 +1,6 @@
-package cliente;
+package servidor;
 
+import cliente.*;
 import java.io.Serializable;
 
 /**
