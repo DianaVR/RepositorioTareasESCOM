@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cliente;
 
 import java.io.IOException;
@@ -17,34 +16,33 @@ import java.util.ArrayList;
  * @author Nyappy
  */
 public class Cliente {
-    
-    public static final int PUERTO=1245;
+
+    public static final int PUERTO = 1245;
+
     public Cliente() {
     }
-    
-    
-    
-     public  Object Servicio(Movimiento m) throws ClassNotFoundException{
-        Object resultado=false;
+
+    public Object Servicio(Movimiento m) throws ClassNotFoundException {
+        Object resultado = false;
         try {
-            Socket cliente = new Socket("127.0.0.1",PUERTO);
+            Socket cliente = new Socket("127.0.0.1", PUERTO);
             System.out.println("Cliente conectado");
-         
+
             //Enviando los valores al Servidor
-            ObjectOutputStream salida=new ObjectOutputStream(cliente.getOutputStream());
+            ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
             salida.writeObject(m);
 
             //Recibiendo los valores del Servidor
             ObjectInputStream ois = new ObjectInputStream(cliente.getInputStream());
-            resultado = ois.readObject(); 
-            
+            resultado = ois.readObject();
+
             System.out.println(resultado);
-            
+
         } catch (IOException ex) {
             System.out.println("Conexion no exitosa");
-            
+
         }
         return resultado;
     }
-    
+
 }
