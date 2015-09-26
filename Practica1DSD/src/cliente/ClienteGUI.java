@@ -70,6 +70,7 @@ private void initCustom()
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTabbedPane1.setToolTipText("Saldo");
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
