@@ -51,7 +51,6 @@ private void initCustom()
         jLabel3 = new javax.swing.JLabel();
         jButtonRetirar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
         jButtonDepositar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextDepositar = new javax.swing.JTextField();
@@ -72,6 +71,7 @@ private void initCustom()
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jTabbedPane1.setBackground(new java.awt.Color(237, 28, 35));
         jTabbedPane1.setToolTipText("Saldo");
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,16 +79,24 @@ private void initCustom()
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(240, 71, 76));
         jPanel1.setToolTipText("Saldo");
 
-        jLabelBalance.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabelBalance.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
+        jLabelBalance.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBalance.setText("$500.00");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Saldo Disponible");
 
-        jLabelBienvenido.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        jLabelBienvenido.setText("Buenas Noches Diana");
+        jLabelBienvenido.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelBienvenido.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabelBienvenido.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelBienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBienvenido.setText("Bienvenido");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,35 +104,36 @@ private void initCustom()
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelBalance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabelBienvenido))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel2)))
-                .addContainerGap(167, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelBienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(jLabelBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Saldo", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(240, 71, 76));
+
         jTextRetirar.setToolTipText("Cantidad a Retirar");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad a Retirar:");
 
+        jButtonRetirar.setBackground(new java.awt.Color(240, 71, 76));
         jButtonRetirar.setText("Aceptar");
         jButtonRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,17 +171,9 @@ private void initCustom()
 
         jTabbedPane1.addTab("Retiro", jPanel2);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jPanel3.setBackground(new java.awt.Color(240, 71, 76));
 
+        jButtonDepositar.setBackground(new java.awt.Color(240, 71, 76));
         jButtonDepositar.setText("Aceptar");
         jButtonDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +181,7 @@ private void initCustom()
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cantidad a Depositar:");
 
         jTextDepositar.setToolTipText("Cantidad a Retirar");
@@ -188,10 +190,6 @@ private void initCustom()
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +198,7 @@ private void initCustom()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonDepositar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,13 +209,14 @@ private void initCustom()
                     .addComponent(jLabel4))
                 .addGap(36, 36, 36)
                 .addComponent(jButtonDepositar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Deposito", jPanel3);
 
+        jPanel5.setBackground(new java.awt.Color(240, 71, 76));
+
+        jButtonTransferir.setBackground(new java.awt.Color(240, 71, 76));
         jButtonTransferir.setText("Aceptar");
         jButtonTransferir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,12 +224,14 @@ private void initCustom()
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cantidad a Transferir:");
 
         jTextTransferir.setToolTipText("Cantidad a Retirar");
 
         jTextCuentaTransferir.setToolTipText("Cantidad a Retirar");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Numero de Cuenta:");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -271,6 +272,7 @@ private void initCustom()
 
         jTabbedPane1.addTab("Transferencia", jPanel5);
 
+        jTableMovimientos.setBackground(new java.awt.Color(240, 240, 240));
         jTableMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -306,6 +308,8 @@ private void initCustom()
         );
 
         jTabbedPane1.addTab("Movimientos", jPanel6);
+
+        jMenuBar1.setBackground(new java.awt.Color(237, 28, 35));
 
         jMenu1.setText("Cerar Sesion");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -403,7 +407,6 @@ private void initCustom()
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
