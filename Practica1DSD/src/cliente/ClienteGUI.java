@@ -11,13 +11,21 @@ package cliente;
  */
 public class ClienteGUI extends javax.swing.JFrame {
 
+    private Cuenta cuenta;
+    
     /**
      * Creates new form ClienteGUI
+     * @param cuenta
      */
-    public ClienteGUI() {
+    public ClienteGUI(Cuenta cuenta) {
+        this.cuenta=cuenta;
         initComponents();
+        initCustom();
     }
-
+private void initCustom()
+{
+    jLabel7.setText("Buenas Noches Diana");
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,6 +287,11 @@ public class ClienteGUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Movimientos", jPanel6);
 
         jMenu1.setText("Cerar Sesion");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -302,6 +315,11 @@ public class ClienteGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu1MouseClicked
 
 
 
