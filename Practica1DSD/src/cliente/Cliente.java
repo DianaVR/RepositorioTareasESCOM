@@ -21,6 +21,29 @@ public class Cliente {
 
     public Cliente() {
     }
+    // Al hacer login me regresaras una cuenta 
+    public Object login (String usuario , String pass) throws ClassNotFoundException {
+        Object resultado = false;
+        try {
+            Socket cliente = new Socket("127.0.0.1", PUERTO);
+            System.out.println("Cliente conectado");
+
+            //Enviando los valores al Servidor
+            ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
+            salida.writeObject("");
+
+            //Recibiendo los valores del Servidor
+            ObjectInputStream ois = new ObjectInputStream(cliente.getInputStream());
+            resultado = ois.readObject();
+
+            System.out.println(resultado);
+
+        } catch (IOException ex) {
+            System.out.println("Conexion no exitosa");
+
+        }
+        return resultado;
+    }
 
     public Object Servicio(Movimiento m) throws ClassNotFoundException {
         Object resultado = false;
