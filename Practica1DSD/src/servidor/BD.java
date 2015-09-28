@@ -21,7 +21,8 @@ public class BD {
     private static final String CUENTA = "select * from Clientes JOIN Cuenta on Clientes.idClientes=? and Cuenta.idClientes=?";
     private static final String BALANCE = "select * from Cuenta where idCuenta=?";
     private static final String Retirar = "Update Cuenta set balance=? where idCuenta=?";
-    private static final String Registrar = "INSERT INTO operacionescuent (fechaOperacion, tipoMovimiento, cantidad, idCuenta) VALUES (?, ?, ?, ?);";
+    private static final String Registrar = "INSERT INTO operacionescuenta (fechaOperacion, tipoMovimiento, cantidad, idCuenta) VALUES (?, ?, ?, ?);";
+    private static final String Movimiento = "select * from operacionescuenta where idCuenta=?";
 
     public BD() {
     }
@@ -145,22 +146,58 @@ public class BD {
 
     public void RegistrarMovimiento(Movimiento m) {
         conectar();
-        try
-        {
+        try {
+            PreparedStatement ps = null;
+            ps = con.prepareStatement(Registrar);
+            Calendar calendar = Calendar.getInstance();
+            java.util.Date currentDate = calendar.getTime();
+            java.sql.Date date = new java.sql.Date(currentDate.getTime());
+            ps.setDate(1, date);
+            ps.setString(2, "" + m.getTipo());
+            ps.setDouble(3, m.getCantidad());
+            ps.setInt(4, m.getIdCuenta());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public String[][] Listado(Movimiento m) {
+        conectar();
         PreparedStatement ps = null;
-        ps = con.prepareStatement(Registrar);
-        Calendar calendar = Calendar.getInstance();
-        java.util.Date currentDate = calendar.getTime();
-        java.sql.Date date = new java.sql.Date(currentDate.getTime());
-        ps.setDate(1, date);
-        ps.setString(2, "" + m.getTipo() );
-        ps.setDouble(3, m.getCantidad());
-        ps.setInt(4, m.getIdCuenta());
-        ps.executeUpdate();
-        } 
-        catch(Exception e)
-        {
-            
+        ResultSet rs;
+        try {
+            ps = con.prepareStatement(Movimiento);
+            ps.setInt(1, m.getIdCuenta());
+            rs = ps.executeQuery();
+            rs.last();
+            String informacion[][] = new String[rs.getRow()][3];
+            System.out.println(rs.getRow());
+            rs.beforeFirst();
+            int i=0;
+            String tipo="";
+            while (rs.next()) {
+                informacion[i][0]=""+rs.getDate("fechaOperacion");
+                switch(rs.getString("tipoMovimiento"))
+                {
+                    case "1":
+                        tipo="Retiro";
+                        break;
+                    case "2":
+                        tipo="Deposito";
+                        break;
+                    case "3":
+                        tipo="Transferencia";
+                        break;
+                }
+                informacion[i][1]=""+tipo;
+                informacion[i][2]=""+rs.getInt("Cantidad");
+                i++;
+            }
+            return informacion;
+        } catch (Exception e) {
+            return null;
         }
     }
 

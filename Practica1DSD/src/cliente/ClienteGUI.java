@@ -8,6 +8,8 @@ package cliente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -74,7 +76,6 @@ public class ClienteGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTabbedPane1.setBackground(new java.awt.Color(237, 28, 35));
         jTabbedPane1.setToolTipText("Saldo");
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -141,7 +142,6 @@ public class ClienteGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad a Retirar:");
 
-        jButtonRetirar.setBackground(new java.awt.Color(240, 71, 76));
         jButtonRetirar.setText("Aceptar");
         jButtonRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +181,6 @@ public class ClienteGUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(240, 71, 76));
 
-        jButtonDepositar.setBackground(new java.awt.Color(240, 71, 76));
         jButtonDepositar.setText("Aceptar");
         jButtonDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +223,6 @@ public class ClienteGUI extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(240, 71, 76));
 
-        jButtonTransferir.setBackground(new java.awt.Color(240, 71, 76));
         jButtonTransferir.setText("Aceptar");
         jButtonTransferir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,14 +251,12 @@ public class ClienteGUI extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonTransferir))
+                    .addComponent(jButtonTransferir)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextCuentaTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextCuentaTransferir, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,6 +381,19 @@ public class ClienteGUI extends javax.swing.JFrame {
                 Cuenta cuentanueva = (Cuenta) c.Servicio(m);
                 jLabelBalance.setText("$ " + cuentanueva.getBalance());
                 this.cuenta = cuentanueva;
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (jTabbedPane1.getSelectedIndex() == 4) {
+            Movimiento m = new Movimiento('4', cuenta.getIdCuenta());
+            Cliente c = new Cliente();
+            try {
+                String [][] listado = (String [][]) c.Servicio(m);
+                String [] encabezado={"Fecha", "Movimieto" , "Cantidad"};
+                DefaultTableModel dtm =new DefaultTableModel(listado,encabezado);
+                jTableMovimientos.setModel(dtm);
+                jTableMovimientos.setEnabled(false);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
             }

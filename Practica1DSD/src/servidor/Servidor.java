@@ -20,6 +20,7 @@ public class Servidor {
                 Cuenta cuenta;
                 BD bd = new BD();
                 ObjectOutputStream salida;
+                String[][] listado;
                 System.out.println("Esperando");
 
                 Socket cliente = server.accept();
@@ -54,14 +55,15 @@ public class Servidor {
                         break;
                     case '3':
                         cuenta = bd.Retirar(movPaquete);
-                        Movimiento movPaquete2=movPaquete;
-                        movPaquete2.setIdCuenta(movPaquete2.getCuenta());
-                        if(bd.Depositar(movPaquete2)== null)
-                        {
+                        Movimiento movPaquete2 = new Movimiento();
+
+                        movPaquete2.setIdCuenta(movPaquete.getCuenta());
+                        movPaquete2.setTipo(movPaquete.getTipo());
+                        movPaquete2.setCantidad(movPaquete.getCantidad());
+
+                        if (bd.Depositar(movPaquete2) == null) {
                             cuenta = bd.Depositar(movPaquete);
-                        }
-                        else
-                        {
+                        } else {
                             bd.RegistrarMovimiento(movPaquete);
                             bd.RegistrarMovimiento(movPaquete2);
                         }
@@ -71,6 +73,11 @@ public class Servidor {
                         cliente.close();
                         break;
                     case '4':
+                        listado = bd.Listado(movPaquete);
+                        //Enviando los valores al Servidor
+                        salida = new ObjectOutputStream(cliente.getOutputStream());
+                        salida.writeObject(listado);
+                        cliente.close();
                         break;
                     case '5':
                         cuenta = bd.login(movPaquete);

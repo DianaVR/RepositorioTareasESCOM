@@ -96,6 +96,11 @@ public class Movimiento implements Serializable{
     public void setClave(String clave) {
         this.clave = clave;
     }
+
+    @Override
+    public String toString() {
+        return "Movimiento{" + "cantidad=" + cantidad + ", tipo=" + tipo + ", cuenta=" + cuenta + ", idCuenta=" + idCuenta + ", usuario=" + usuario + ", clave=" + clave + '}';
+    }
     
     
     
