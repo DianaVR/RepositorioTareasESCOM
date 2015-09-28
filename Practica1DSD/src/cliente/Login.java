@@ -131,9 +131,10 @@ public class Login extends javax.swing.JFrame {
         String usuario = jTextUsuario.getText();
         String pass = jPasswordPass.getText();
         Cliente c = new Cliente();
+        Movimiento m= new Movimiento('5',usuario, pass);
         try {
-            Cuenta resultado = (Cuenta) c.login(usuario, pass);
-            if(resultado == null)
+            Cuenta resultado = (Cuenta) c.login(m);
+            if(resultado != null)
             {
                 
                 new ClienteGUI(resultado).setVisible(true);

@@ -7,6 +7,7 @@ package cliente;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,22 +16,24 @@ import java.util.logging.Logger;
 public class ClienteGUI extends javax.swing.JFrame {
 
     private Cuenta cuenta;
-    
+
     /**
      * Creates new form ClienteGUI
+     *
      * @param cuenta
      */
     public ClienteGUI(Cuenta cuenta) {
-        this.cuenta=cuenta;
+        this.cuenta = cuenta;
         initComponents();
         initCustom();
     }
-private void initCustom()
-{
-    jLabelBienvenido.setText("Bienvenido");
-    jLabelBalance.setText("$ " + cuenta.getBalance());
-    
-}
+
+    private void initCustom() {
+        jLabelBienvenido.setText("Bienvenido");
+        jLabelBalance.setText("$ " + cuenta.getBalance());
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,6 +84,11 @@ private void initCustom()
 
         jPanel1.setBackground(new java.awt.Color(240, 71, 76));
         jPanel1.setToolTipText("Saldo");
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jLabelBalance.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabelBalance.setForeground(new java.awt.Color(255, 255, 255));
@@ -339,55 +347,101 @@ private void initCustom()
 
     private void jButtonRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetirarActionPerformed
         // TODO add your handling code here:
-        Movimiento m = new Movimiento(Double.parseDouble(jTextRetirar.getText()),'1',cuenta.getIdCuenta());
-        Cliente c = new Cliente();
-        try {
-            c.Servicio(m);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (Double.parseDouble(jTextRetirar.getText()) < this.cuenta.getBalance()) {
+
+            Movimiento m = new Movimiento(Double.parseDouble(jTextRetirar.getText()), '1', cuenta.getIdCuenta());
+            Cliente c = new Cliente();
+            try {
+                Cuenta nuevacuenta = (Cuenta) c.Servicio(m);
+                if (nuevacuenta == null) {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error en la transacción", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    this.cuenta = nuevacuenta;
+                    JOptionPane.showMessageDialog(this, "Transacción exitosa", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Tu balance es menor a esta cantidad", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jButtonRetirarActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
         new Login().setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
-        Movimiento m = new Movimiento ('0',cuenta.getIdCuenta());
-        Cliente c = new Cliente();
-        try {
-            c.Servicio(m);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            Movimiento m = new Movimiento('0', cuenta.getIdCuenta());
+            Cliente c = new Cliente();
+            try {
+                Cuenta cuentanueva = (Cuenta) c.Servicio(m);
+                jLabelBalance.setText("$ " + cuentanueva.getBalance());
+                this.cuenta = cuentanueva;
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
         // TODO add your handling code here:
-        Movimiento m = new Movimiento (Double.parseDouble(jTextDepositar.getText()),'2',cuenta.getIdCuenta());
+
+        Movimiento m = new Movimiento(Double.parseDouble(jTextDepositar.getText()), '2', cuenta.getIdCuenta());
         Cliente c = new Cliente();
         try {
-            c.Servicio(m);
+            Cuenta nuevacuenta = (Cuenta) c.Servicio(m);
+            if (nuevacuenta == null) {
+                JOptionPane.showMessageDialog(this, "Ocurrio un error en la transacción", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                this.cuenta = nuevacuenta;
+                JOptionPane.showMessageDialog(this, "Transacción exitosa", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_jButtonDepositarActionPerformed
 
     private void jButtonTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferirActionPerformed
         // TODO add your handling code here:
-        Movimiento m = new Movimiento (Double.parseDouble(jTextTransferir.getText()),'3',cuenta.getIdCuenta(),Integer.parseInt(jTextCuentaTransferir.getText()));
-        Cliente c = new Cliente();
-        try {
-            c.Servicio(m);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (Double.parseDouble(jTextTransferir.getText()) < this.cuenta.getBalance()) {
+
+            Movimiento m = new Movimiento(Double.parseDouble(jTextTransferir.getText()), '3', cuenta.getIdCuenta(), Integer.parseInt(jTextCuentaTransferir.getText()));
+            Cliente c = new Cliente();
+            try {
+                Cuenta nuevacuenta = (Cuenta) c.Servicio(m);
+                if (nuevacuenta == null) {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error en la transacción", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    this.cuenta = nuevacuenta;
+                    JOptionPane.showMessageDialog(this, "Transacción exitosa", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Tu balance es menor a esta cantidad", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_jButtonTransferirActionPerformed
 
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -12,9 +12,21 @@ public class Movimiento implements Serializable{
     private char tipo;
     private int cuenta=0;
     private int idCuenta;
+    private String usuario="";
+    private String clave="";
 
     public Movimiento() {
     }
+    
+    //Este constructor sera para el login 
+
+    public Movimiento(char tipo , String usuario, String clave) {
+        this.tipo=tipo;
+        this.usuario = usuario;
+        this.clave = clave;
+    }
+    
+    
     //Este constructor de usara para las operaciones normales
     public Movimiento(double cantidad, char tipo, int idCuenta) {
         this.cantidad = cantidad;
@@ -24,7 +36,7 @@ public class Movimiento implements Serializable{
     
     
     //Este constructor de usara unicamente para la transferencia
-    public Movimiento(double cantidad, char tipo, int cuenta, int idCuenta) {
+    public Movimiento(double cantidad, char tipo, int idCuenta, int cuenta) {
         this.cantidad = cantidad;
         this.tipo = tipo;
         this.cuenta = cuenta;
@@ -68,6 +80,23 @@ public class Movimiento implements Serializable{
     public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+    
     
     
 

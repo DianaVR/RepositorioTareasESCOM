@@ -1,12 +1,14 @@
 package cliente;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ram
  */
 
 //Se retornara esta objeto en caso que el login sea satisfactorio
-public class Cuenta {
+public class Cuenta implements Serializable {
     
     private int idCuenta;
     private double balance;
@@ -34,6 +36,11 @@ public class Cuenta {
 
     public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" + "idCuenta=" + idCuenta + ", balance=" + balance + '}';
     }
     
     
